@@ -1,5 +1,10 @@
 #!/bin/sh
 
+### This is still from SVN - will not work with git.
+### TO BE FIXED!
+
+exit 1
+
 version=$1
 if [ "x${version}" = "x" ]; then
     echo "No version, please: $0 1.1.2"
