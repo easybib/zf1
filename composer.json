@@ -1,0 +1,16 @@
+{
+    "name": "easybib/zf1",
+    "description": "ZF1 clone of official ZF release",
+    "homepage": "https://github.com/easybib/zf1",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Till Klampaeckel",
+            "email": "till@php.net"
+        }
+    ],
+    "require": {
+        "php": ">=5.2.0"
+    }
+}
