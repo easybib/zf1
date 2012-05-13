@@ -1,0 +1,10 @@
+{
+    "name":"easybib-core/zf1",
+    "description": "Zf1 clone (without require_once)",
+    "authors": [
+        {
+            "name": "Zend Framework Team",
+            "email": "http://framework.zend.com/community/contributors"
+        }
+    ]
+}
