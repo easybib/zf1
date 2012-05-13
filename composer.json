@@ -1,6 +1,7 @@
 {
     "name":"easybib-core/zf1",
     "description": "Zf1 clone (without require_once)",
+    "type": "Library",
     "authors": [
         {
             "name": "Zend Framework Team",
