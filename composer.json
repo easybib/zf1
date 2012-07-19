@@ -7,5 +7,10 @@
             "name": "Zend Framework Team",
             "email": "http://framework.zend.com/community/contributors"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-0": {
+            "Zend": ""
+        }
+    }
 }
