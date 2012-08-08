@@ -1,6 +1,6 @@
 {
     "name":"easybib-core/zf1",
-    "description": "Zf1 clone (without require_once)",
+    "description": "Zf1 clone (without require_once and a couple components we don't need)",
     "type": "Library",
     "authors": [
         {
@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-0": {
-            "Zend": ""
+            "Zend": "library"
         }
     }
 }
