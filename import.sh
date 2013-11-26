@@ -1,66 +1,49 @@
 #!/bin/sh
 
-### This is still from SVN - will not work with git.
-### TO BE FIXED!
+### download
 
-exit 1
+./composer.phar require zendframework/zendframework1
 
-version=$1
-if [ "x${version}" = "x" ]; then
-    echo "No version, please: $0 1.1.2"
-    exit 1
-fi
+### move over old version
 
-remote="http://framework.zend.com/releases/ZendFramework-${version}/ZendFramework-${version}-minimal.tar.gz"
+rm -rf library/Zend
+mv vendor/zendframework/zendframework1/library/Zend/ library/
 
-wget $remote
-if [ "$?" != 0 ]; then
-    echo "Failed to download file."
-    exit 1
-fi
+### cleanup
 
-tar -zxvf ZendFramework-${version}-minimal.tar.gz
-if [ "$?" != 0 ]; then
-    echo "Failed to extract file."
-    exit 1
-fi
+rm -r vendor
+rm -r composer.lock
 
-mv ./ZendFramework-${version}-minimal/library/Zend ./Zend-${version}
-if [ "$?" != 0 ]; then
-    echo "Couldn't move framework files."
-    exit 1
-fi
+rm -rf library/Zend/Amf*
+rm -rf library/Zend/Barcode*
+rm -rf library/Zend/Dojo*
+rm -rf library/Zend/EventManager*
+rm -rf library/Zend/Gdata/Analytics*
+rm -rf library/Zend/Ldap*
+rm -rf library/Zend/Markup*
+rm -rf library/Zend/Mobile*
+rm -rf library/Zend/Pdf*
+rm -rf library/Zend/Search*
+rm -rf library/Zend/Stdlib*
+rm -rf library/Zend/Tag*
+rm -rf library/Zend/Text*
+rm -rf library/Zend/Validate/Ldap*
 
-svn add ./Zend-${version}
-svn ci -m "initial checkin of ZF ${version}" ./Zend-${version}
+### patch
 
 # do not strip require_once from:
 # * Zend_Loader_Autoloader
 # * Zend_Application*
 # * Zend_Tool*
-cd ./Zend-${version}
+cd ./library/Zend
 find . -name '*.php' \
     -not -wholename '*/Loader/Autoloader.php' \
     -not -wholename '*/Application*' \
     -not -wholename '*/Tool*' \
     -print0 | \
-    xargs -0 sed --regexp-extended --in-place 's/(require_once)/\/\/ \1/g'
+    xargs -0 sed --regexp-extended --in-place \
+        -e 's/(require_once)/\/\/ \1/g'
 
-cd ..
-
-svn ci -m 'strip require_once' Zend-${version}
-svn up Zend-${version}
-
-svn rm Zend-${version}/Amf*
-svn rm Zend-${version}/Barcode*
-svn rm Zend-${version}/Dojo*
-svn rm Zend-${version}/Ldap*
-svn rm Zend-${version}/Markup*
-svn rm Zend-${version}/Pdf*
-svn rm Zend-${version}/Search*
-svn rm Zend-${version}/Tag*
-svn rm Zend-${version}/Text*
-
-svn ci -m 'remove Zend_Amf, Zend_Barcode, Zend_Dojo, Zend_Ldap, Zend_Markup, Zend_Pdf, Zend_Search, Zend_Tag, Zend_Text' Zend-${version}/
+cd ../..
 
 echo "Done";
