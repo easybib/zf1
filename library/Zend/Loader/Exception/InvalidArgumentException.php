@@ -14,30 +14,21 @@
  *
  * @category   Zend
  * @package    Zend_Loader
- * @subpackage Autoloader
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @version    $Id$
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
+// require_once dirname(__FILE__) . '/../Exception.php';
+
 /**
- * Autoloader interface
- *
+ * @category   Zend
  * @package    Zend_Loader
- * @subpackage Autoloader
+ * @subpackage Exception
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-interface Zend_Loader_Autoloader_Interface
+class Zend_Loader_Exception_InvalidArgumentException
+    extends Zend_Loader_Exception
 {
-    /**
-     * Autoload a class
-     *
-     * @abstract
-     * @param   string $class
-     * @return  mixed
-     *          False [if unable to load $class]
-     *          get_class($class) [if $class is successfully loaded]
-     */
-    public function autoload($class);
 }
