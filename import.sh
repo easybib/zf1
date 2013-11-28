@@ -29,7 +29,7 @@ rm -rf library/Zend/Tag*
 rm -rf library/Zend/Text*
 rm -rf library/Zend/Validate/Ldap*
 
-### patch
+### strip require_once
 
 # do not strip require_once from:
 # * Zend_Loader_Autoloader
@@ -43,7 +43,10 @@ find . -name '*.php' \
     -print0 | \
     xargs -0 sed --regexp-extended --in-place \
         -e 's/(require_once)/\/\/ \1/g'
-
 cd ../..
+
+### apply patches
+
+cat patches/*.patch | patch -p0
 
 echo "Done";
