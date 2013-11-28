@@ -13,5 +13,5 @@
             "Zend": "library"
         }
     },
-    "include-path": ["library/"],
+    "include-path": ["library/"]
 }
