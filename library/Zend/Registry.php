@@ -14,9 +14,9 @@
  *
  * @category   Zend
  * @package    Zend_Registry
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: Registry.php 23775 2011-03-01 17:25:24Z ralph $
+ * @version    $Id$
  */
 
 /**
@@ -24,7 +24,7 @@
  *
  * @category   Zend
  * @package    Zend_Registry
- * @copyright  Copyright (c) 2005-2011 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Registry extends ArrayObject
@@ -194,16 +194,4 @@ class Zend_Registry extends ArrayObject
     {
         parent::__construct($array, $flags);
     }
-
-    /**
-     * @param string $index
-     * @returns mixed
-     *
-     * Workaround for http://bugs.php.net/bug.php?id=40442 (ZF-960).
-     */
-    public function offsetExists($index)
-    {
-        return array_key_exists($index, $this);
-    }
-
 }
