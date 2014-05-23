@@ -14,7 +14,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
@@ -26,7 +26,7 @@
  *
  * @category   Zend
  * @package    Zend_Form
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
  */
@@ -2494,7 +2494,27 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
      */
     public function hasErrors()
     {
-        return $this->_errorsExist;
+        $errors = $this->_errorsExist;
+
+        if (!$errors) {
+            /** @var Zend_Form_Element $element */
+            foreach ($this->getElements() as $element) {
+                if ($element->hasErrors()) {
+                    $errors = true;
+                    break;
+                }
+            }
+
+            /** @var Zend_Form_SubForm $subForm */
+            foreach ($this->getSubForms() as $subForm) {
+                if ($subForm->hasErrors()) {
+                    $errors = true;
+                    break;
+                }
+            }
+        }
+
+        return $errors;
     }
 
     /**
@@ -3357,6 +3377,13 @@ class Zend_Form implements Iterator, Countable, Zend_Validate_Interface
                     } else {
                         $items[$order] = $key;
                     }
+                } elseif (isset($items[$order]) && $items[$order] !== $key) {
+                    throw new Zend_Form_Exception('Form elements ' .
+                        $items[$order] . ' and ' . $key .
+                        ' have the same order (' .
+                        $order . ') - ' .
+                        'this would result in only the last added element to be rendered'
+                    );
                 } else {
                     $items[$order] = $key;
                 }
