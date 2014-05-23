@@ -14,7 +14,7 @@
  *
  * @category  Zend
  * @package   Zend_Date
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  * @version   $Id$
  */
@@ -30,7 +30,7 @@
 /**
  * @category  Zend
  * @package   Zend_Date
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
  * @license   http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Date extends Zend_Date_DateObject
@@ -1208,7 +1208,7 @@ class Zend_Date extends Zend_Date_DateObject
             return $zone;
         }
 
-        preg_match('/([[:alpha:]\/]{3,30})(?!.*([[:alpha:]\/]{3,30}))/', $zone, $match);
+        preg_match('/([[:alpha:]\/_]{3,30})(?!.*([[:alpha:]\/]{3,30}))/', $zone, $match);
         try {
             if (!empty($match) and (!is_int($match[count($match) - 1]))) {
                 $oldzone = $this->getTimezone();
