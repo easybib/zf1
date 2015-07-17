@@ -5,7 +5,7 @@
     "authors": [
         {
             "name": "Zend Framework Team",
-            "email": "http://framework.zend.com/community/contributors"
+            "homepage": "http://framework.zend.com/community/contributors"
         }
     ],
     "autoload": {
